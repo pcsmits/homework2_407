@@ -1,0 +1,146 @@
+Parker Smits
+CS 407
+Homework 2
+___________________________________________________________________________________
+1)ESSID from Beacon Frames
+Using Perl and an exported CSV of the ssid and frame type 
+I looped through all rows in the file and checked to see if it was a Beacon Frame,
+next I added the all rows that were a beacon frame to a hash with the key as the ssid
+
+eduroa
+eduXHam
+UW
+K
+edurt
+UW\\016\\332\\237
+\\b
+/4
+@
+y=\\002
+ed\\v
+\\024
+DWNet\\001\\006
+UWNet
+jduroam\\001\\006
+eduroam
+\\035\\031
+/\\b
+UWN
+
+
+
+
+2) I looked at a rows properties in wireshark to find the channel	
+channel 48
+frequency 5240
+
+
+
+3) Average Beacon Interval
+Using Perl and an exported CSV of the ssid, frame type, and beacon interveral 
+I looped through all rows in the file and checked to see if it was a Beacon Frame,
+next I added the beacon interval and a counter to a hash with the key as the ssid. 
+Lastly, took the total and divided by the number of instances to find the avearge
+
+eduroa	0.098304
+eduXHam	15.149056
+UW	3.109888
+K	0.1024
+edurt	0.1024
+UW\\016\\332\\237	0.1024
+\\b	0.1024
+/4	 0.1024
+@	 7.503872
+y=\\002	51.52256
+ed\\v	0.1024
+\\024	0.1024
+DWNet\\001\\006		0.1024
+UWNet	0.159478415248466
+jduroam\\001\\006	0.1024
+eduroam	0.139397724508045
+\\035\\031		0.1024
+/\\b	0.1024
+UWN	2.52416
+
+
+
+4) MAC address communicating with 00:24:6c:5e:03:30
+I looped through all the rows in the file if the destination matched the one above,
+I added to a hash so I duplicates would be ignored.
+
+18 mac addresses
+
+d8:a2:de:4a:ea:80
+Apple_13:11:d4
+22:f1:57:93:42:c1
+df:35:3e:d8:0d:ae
+Apple_93:42:c1
+Apple_a0:46:4f
+Cisco_9f:f0:60
+Telemati_ee:94:23
+ConwareC_fd:c6:28
+Apple_39:d1:f8
+Apple_ce:e9:52
+Apple_07:c4:88
+d8:c2:20:c4:8e:50
+Cisco_9f:f0:00
+IntelCor_9f:cd:1b
+Cisco_9f:90:ae
+88:2b:87:3d:67:0d
+Apple_c8:3b:25
+
+5) List of Managment Frames
+I looped through  all the rows checking if the "management frames" (wlan_mgt) was yes,
+then I added it to hash with the management frame type as the key, if it already 
+exitsted I added 1 to the value of hash.
+
+'Authentication' => 76,
+'Reassociation Response' => 58,
+'7' => 59,
+'Probe Response' => 318,
+'Action' => 64,
+'Deauthentication' => 64,
+'Association Request' => 62,
+'Disassociate' => 53,
+'Probe Request' => 129,
+'Beacon frame' => 6509,
+'Measurement Pilot' => 50,
+'Action No Ack' => 59,
+'Association Response' => 57,
+'ATIM' => 63,
+'Reassociation Request' => 45,
+'Aruba Management' => 59
+
+6) Max Data Rate
+I sorted the column in wireshark 
+Max = 300
+
+With a data rate of 300 it is clear we are using 802.11n with channel bonding
+otherwise we would only get 150MB/s
+
+7) Data Rate Frames for mac adddress
+I looped through all the rows and printed data rate for managment frames where the
+source is 00:24:6c:5e:03:30.
+
+12MB/s 
+This is because this is the basic dat rate
+
+
+8)
+I looped through all the rows with a counter, and also include a variable that 
+counted "bad" packets that were returned with ERROR in expert.severity column
+
+Percent Bad Packets: 1.45281307084244%
+
+9)
+Similar to 8, I had two variables, counter and RTS/CTS variable that I incremented
+the rts/cts var when the frame type was wither 'clear-to-send' or 'request-to-send'
+
+Request/Clear to Sends: 24.2543704408887%
+
+10)
+Frame length (bytes) and data rate can be used to find the duration of each frame,
+the total came out to be 12.53 seconds.  This is divided by the total time of the
+recording 64.214 seconds.
+
+Utilizaition: 19.6%
